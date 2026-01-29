@@ -9,9 +9,7 @@ const newMechanic = async (req, res) => {
 
         const result = await pool.query('INSERT INTO mechanics (userName, email, passwordHash) VALUES ($1, $2, $3)', [userName, email, passwordHash]);
 
-        res.status(201).json(result.rows);
-
-        console.log('user created');
+        return res.status(201).json(result.rows);
 
     } catch (err) {
         return res.status(401).send({msg: 'User Not Created'})
@@ -30,7 +28,7 @@ const loginMechanic = async (req, res) => {
         }
         req.session.user = result.rows[0];
         return res.status(200).send(result.rows[0]);
-        
+
     } catch (err) {
         return res.status(500).send({ msg: 'Server Error' });
     }
