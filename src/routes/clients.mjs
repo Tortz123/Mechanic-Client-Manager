@@ -18,10 +18,10 @@ const getAllClients = async (req, res) => {
 
 const getClient = async (req, res) => {
     try {
-        const parsedId = parseInt(req.params.id);
+        const clientId = parseInt(req.params.id);
         const mechanicId = req.session.user.id;
 
-        const result = await pool.query(`SELECT * FROM clients WHERE id = $1 AND userId = $2`, [parsedId, mechanicId]);
+        const result = await pool.query(`SELECT * FROM clients WHERE id = $1 AND userId = $2`, [clientId, mechanicId]);
 
         if (result.rows.length === 0) {
             return res.status(404).send({ msg: 'client not found' });
@@ -51,15 +51,18 @@ const createClient = async (req, res) => {
 
 const deleteClient = async (req, res) => {
     try {
-        const parsedId = parseInt(req.params.id);
+        const clientId = parseInt(req.params.id);
         const mechanicId = req.session.user.id;
 
-        const result = await pool.query(`DELETE FROM clients WHERE id = $1 AND userId = $2`, [parsedId, mechanicId]);
+        const result = await pool.query(`DELETE FROM clients WHERE id = $1 AND userId = $2 RETURNING *`, [clientId, mechanicId]);
 
-        return res.status(201).json(result.rows);
+        if (result.rows.length === 0) {
+            return res.status(404).send({ msg: 'client not found' });
+        }
 
+        return res.status(200).json(result.rows);
     } catch (err) {
-        return res.status(500).send({msg: `Server Error`});
+        return res.status(500).send({ msg: 'Server Error' });
     }
 }
 
