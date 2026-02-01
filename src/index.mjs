@@ -13,6 +13,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(express.static('frontend'));
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
