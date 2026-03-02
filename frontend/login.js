@@ -19,7 +19,9 @@ form.addEventListener('submit', async (e) => {
     try {
         const data = await loginMechanic(username_input.value, password_input.value);
         console.log(data);
-        // Handle successful login (e.g., redirect)
+        
+        // redirect to clients pape on successful login
+        window.location.href = 'clients.html';
     } catch (err) {
         error_message.innerText = 'Login failed.';
     }

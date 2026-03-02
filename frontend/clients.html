@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+     <script type="module" src="clients.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Clients</h1>
+    <h2>create new client</h2>
+
+    <form id="newClient-form">
+        <div>
+            <input type="text" name="username" id="username-input" placeholder="name">
+        </div>
+
+        <button type="submit" onclick="window.location.reload();">create client</button>
+        
+        <div class="spacer"></div>
+    </form>
+
+    <table id="client-table">
+        <tr>
+            <th>List of Clients</th>
+        </tr>
+    </table>
+
+    </div>
+    
+</body>
+</html>
