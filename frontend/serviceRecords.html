@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceRecords</title>
+    <script type="module" src="serviceRecords.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="car-name">Service Records</h1>
+        <a href="cars.html">Back to Cars</a>
+
+        <h2>Service Records</h2>
+        <table id="serviceRecords-table">
+            <tr>
+                <th>Service Type</th>
+                <th>Notes</th>
+                <th>Kilometers</th>
+                <th>Service Date</th>
+                <th>Delete</th>
+            </tr>
+        </table>
+
+        <h2>Add New Service Record</h2>
+        <form id="newServiceRecord-form">
+            <div>
+                <input type="text" name="serviceType" id="serviceType-input" placeholder="Service Type">
+            </div>
+            <div>
+                <input type="text" name="notes" id="notes-input" placeholder="Notes">
+            </div>
+            <div>
+                <input type="number" name="kilometers" id="kilometers-input" placeholder="Kilometers">
+            </div>
+            <div>
+                <input type="date" name="serviceDate" id="serviceDate-input" placeholder="Service Date">
+            </div>
+            <button type="submit" onclick="window.location.reload();">Add Service Record</button>
+        </form>
+
+    </div>
+    
+</body>
+</html>

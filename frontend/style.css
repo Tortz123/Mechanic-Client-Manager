@@ -6,3 +6,20 @@
 .spacer {
   margin-bottom: 20px;
 }
+
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightskyblue;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid black;
+}
+
+table {
+  background-color: lightskyblue;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid black;
+}
