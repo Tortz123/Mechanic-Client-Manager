@@ -65,23 +65,3 @@ async function loadCars() {
 }
 
 loadCars();
-
-// form.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-    
-//     const formData = new FormData(form);
-//     const carData = {
-//         brand: formData.get('brand'),
-//         model: formData.get('model'),
-//         year: parseInt(formData.get('year')),
-//         vin: formData.get('vin')
-//     };
-
-//     try {
-//         await createCar(clientId, carData);
-//         form.reset();
-//         window.location.reload();
-//     } catch (err) {
-//         console.error(err);
-//     }
-// });
