@@ -31,7 +31,8 @@ async function loadClients() {
 
         cell.style.cursor = 'pointer';
         cell.addEventListener('click', () => {
-            window.location.href = `/clients/${client.id}`;
+            // sends client id into the url as a query parameter
+            window.location.href = `cars.html?clientId=${client.id}`;
         });
         
     });
