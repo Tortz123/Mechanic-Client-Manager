@@ -72,3 +72,34 @@ export const deleteCar = async (carId) => {
     });
     return res.json();
 };
+
+export async function getServiceRecords(carId) {
+    const res = await fetch(`/api/cars/${carId}/service-records`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    });
+    
+    return res.json();
+}
+
+export async function createServiceRecord(carId, serviceType, notes, kilometers, serviceDate) {
+    const response = await fetch(`/api/cars/${carId}/service-records`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            serviceType: serviceType,
+            notes: notes,
+            kilometers: kilometers,
+            serviceDate: serviceDate
+        })
+    });
+    return response.json();
+}
+
+export async function deleteServiceRecord(id) {
+    const response = await fetch(`/api/service-records/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    });
+    return response.json();
+}
