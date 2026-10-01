@@ -2,6 +2,17 @@
 
 A full-stack web application for mechanics to manage their clients, cars, and service records.
 
+<img width="1900" height="600" alt="image" src="https://github.com/user-attachments/assets/3c7445b0-9117-4c1e-9ab3-7fb05df98dc9" />
+
+
+<img width="1894" height="547" alt="image" src="https://github.com/user-attachments/assets/bd4aa3ae-f69f-48a8-8efc-f81526474a89" />
+
+<img width="1889" height="687" alt="image" src="https://github.com/user-attachments/assets/7d527858-13e8-4ef9-abbe-dcd5151f6986" />
+
+
+<img width="1888" height="868" alt="image" src="https://github.com/user-attachments/assets/39fba380-808b-4957-bc17-0f00d0c1be42" />
+
+
 ---
 
 ## Features
