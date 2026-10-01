@@ -47,10 +47,17 @@ Make sure you have the following installed:
 
 3. **Set up the database**
 
-   Run the schema file to create the required tables:
-   ```bash
-   psql -U your_username -d your_database -f schema.sql
-   ```
+    Create the database first (in pgAdmin, or in psql with `CREATE DATABASE your_database;`), then run the schema file:
+
+      ```
+      psql -U your_username -d your_database -f schema.sql
+      ```
+      
+      **Windows:** if you get "psql is not recognized", either add `C:\Program Files\PostgreSQL\18\bin` to your PATH or run it with the full path:
+      
+      ```
+      & "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U your_username -d your_database -f schema.sql
+      ```
 
 4. **Configure environment variables**
 
@@ -77,7 +84,7 @@ Make sure you have the following installed:
 
 6. **Open the app**
 
-   Visit [http://localhost:3000](http://localhost:3000) in your browser.
+   Visit [http://localhost:3000/login.html](http://localhost:3000/login.html) in your browser.
 
 > **Note:** This app is designed to run locally. It connects to a local PostgreSQL instance.
 
