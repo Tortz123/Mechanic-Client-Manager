@@ -1,25 +1,161 @@
+/* Colors - change these to restyle the whole app */
+:root {
+  --bg: #1f2124;          /* page background */
+  --panel: #2b2e33;       /* the card in the middle */
+  --panel-light: #363a41; /* row hover */
+  --border: #444850;
+  --text: #e8eaed;
+  --muted: #9aa0a8;
+  --blue: #4a9eed;
+  --blue-dark: #2f7fcf;
+  --header-blue: #2c4a69; /* table header */
+  --red: #e5675f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 32px 16px;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* The card that holds each page */
+.wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 28px;
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--blue);
+  border-bottom: 2px solid var(--blue);
+}
+
+h2 {
+  margin: 28px 0 12px;
+  font-size: 1.2rem;
+}
+
+p {
+  color: var(--muted);
+}
+
+a {
+  color: var(--blue);
+}
+
+a:hover {
+  color: #7bb8f2;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+th {
+  padding: 10px 14px;
+  text-align: left;
+  background-color: var(--header-blue);
+  color: white;
+}
+
+td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+}
+
+tr:hover td {
+  background-color: var(--panel-light);
+}
+
+/* Forms */
+form > div {
+  margin-bottom: 12px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  color: var(--text);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+input::placeholder {
+  color: var(--muted);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+input[type="date"] {
+  color-scheme: dark;
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--blue-dark);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--blue);
+}
+
+/* The Delete buttons inside tables */
+td button {
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  color: var(--red);
+  background-color: transparent;
+  border: 1px solid var(--red);
+}
+
+td button:hover {
+  color: white;
+  background-color: var(--red);
+}
+
+/* Error messages and red-highlighted inputs */
+#error-message {
+  min-height: 1.5em;
+  color: #ff8a80;
+}
+
 .Incorrect {
-  border: 2px solid red;
-  background-color: #ffe6e6;
+  outline: 2px solid var(--red);
+  border-radius: 6px;
 }
 
 .spacer {
   margin-bottom: 20px;
-}
-
-h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightskyblue;
-  padding: 20px;
-  border-radius: 20px;
-  border: 3px solid black;
-}
-
-table {
-  background-color: lightskyblue;
-  padding: 20px;
-  border-radius: 20px;
-  border: 3px solid black;
 }

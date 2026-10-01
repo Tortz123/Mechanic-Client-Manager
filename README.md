@@ -84,7 +84,7 @@ Make sure you have the following installed:
 
 6. **Open the app**
 
-   Visit [http://localhost:3000/login.html](http://localhost:3000/login.html) in your browser.
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 > **Note:** This app is designed to run locally. It connects to a local PostgreSQL instance.
 
