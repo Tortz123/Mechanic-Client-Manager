@@ -46,6 +46,10 @@ const logoutMechanic = async (req, res) => {
 
 const getMechanicInfo = async (req, res) => {
     try {
+        if (!req.session.user) {
+            return res.status(401).send({ msg: 'Authentication required' });
+        }
+
         res.status(200).send(req.session.user);
 
     } catch (err) {

@@ -7,6 +7,7 @@ const serviceType_input = document.getElementById('serviceType-input');
 const notes_input = document.getElementById('notes-input');
 const kilometers_input = document.getElementById('kilometers-input');
 const serviceDate_input = document.getElementById('serviceDate-input');
+const error_message = document.getElementById('error-message');
 
 // Get carId from URL
 const params = new URLSearchParams(window.location.search);
@@ -22,13 +23,19 @@ form.addEventListener('submit', async (e) => {
         form.reset();
 
     } catch (err) {
-        const error_message = document.getElementById('error-message');    
+        showError(err);
     }
 })
 
 
 async function loadServiceRecords() {
-    const serviceRecords = await getServiceRecords(carId);
+    let serviceRecords;
+    try {
+        serviceRecords = await getServiceRecords(carId);
+    } catch (err) {
+        showError(err);
+        return;
+    }
     console.log(carId);
     console.log(serviceRecords);
 
@@ -57,6 +64,17 @@ async function loadServiceRecords() {
         deleteCell.appendChild(deleteBtn);
         
     });
+}
+
+function showError(err) {
+    if (err.status === 401) {
+        error_message.innerText = 'Authentication required. Please log in.';
+        return;
+    }
+
+    error_message.innerText = err.status === 404
+        ? 'You do not have access to this car.'
+        : 'Unable to load service records. Please try again.';
 }
 
 loadServiceRecords();

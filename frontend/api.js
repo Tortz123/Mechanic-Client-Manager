@@ -1,5 +1,18 @@
+async function requestJson(url, options) {
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    if (!res.ok) {
+        const error = new Error(data.msg || 'Request failed');
+        error.status = res.status;
+        throw error;
+    }
+
+    return data;
+}
+
 export async function loginMechanic(username, password) {
-    const res = await fetch('http://localhost:3000/api/auth/login', {
+    return requestJson('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -7,8 +20,6 @@ export async function loginMechanic(username, password) {
             passwordHash: password
         })
     });
-    return res.json();
-
 }
 
 export async function registerMechanic(username, email, password) {
@@ -44,15 +55,14 @@ export async function createClient(username) {
 }
 
 export const getCars = async (clientId) => {
-    const res = await fetch(`http://localhost:3000/api/clients/${clientId}/cars`, {
+    return requestJson(`http://localhost:3000/api/clients/${clientId}/cars`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     });
-    return res.json();
 };
 
 export const createCar = async (clientId, brand, model, year, vin) => {
-    const response = await fetch(`http://localhost:3000/api/clients/${clientId}/cars`, {
+    return requestJson(`http://localhost:3000/api/clients/${clientId}/cars`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,7 +72,6 @@ export const createCar = async (clientId, brand, model, year, vin) => {
             vin: vin
         })
     });
-    return response.json();
 };
 
 export const deleteCar = async (carId) => {
@@ -74,12 +83,10 @@ export const deleteCar = async (carId) => {
 };
 
 export async function getServiceRecords(carId) {
-    const res = await fetch(`/api/cars/${carId}/service-records`, {
+    return requestJson(`/api/cars/${carId}/service-records`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     });
-    
-    return res.json();
 }
 
 export async function createServiceRecord(carId, serviceType, notes, kilometers, serviceDate) {
