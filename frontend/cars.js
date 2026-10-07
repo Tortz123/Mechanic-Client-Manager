@@ -7,6 +7,7 @@ const brand_input = document.getElementById('brand-input');
 const model_input = document.getElementById('model-input');
 const year_input = document.getElementById('year-input');
 const vin_input = document.getElementById('vin-input');
+const error_message = document.getElementById('error-message');
 
 // Get clientId from URL
 const params = new URLSearchParams(window.location.search);
@@ -22,13 +23,19 @@ form.addEventListener('submit', async (e) => {
         form.reset();
 
     } catch (err) {
-        const error_message = document.getElementById('error-message');    
+        showError(err);
     }
 })
 
 
 async function loadCars() {
-    const cars = await getCars(clientId);
+    let cars;
+    try {
+        cars = await getCars(clientId);
+    } catch (err) {
+        showError(err);
+        return;
+    }
     console.log(clientId);
     console.log(cars);
 
@@ -62,6 +69,17 @@ async function loadCars() {
         });
         
     });
+}
+
+function showError(err) {
+    if (err.status === 401) {
+        error_message.innerText = 'Authentication required. Please log in.';
+        return;
+    }
+
+    error_message.innerText = err.status === 404
+        ? 'You do not have access to this client.'
+        : 'Unable to load cars. Please try again.';
 }
 
 loadCars();
