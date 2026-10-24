@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon ./src/index.mjs",
-    "start:": "node ./src/index.mjs"
+    "start": "node ./src/index.mjs",
+    "dev": "nodemon ./src/index.mjs",
+    "lint": "eslint .",
+    "test": "echo \"No tests yet (added in Milestone 2)\""
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,9 @@
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
     "nodemon": "^3.1.11"
   }
 }
