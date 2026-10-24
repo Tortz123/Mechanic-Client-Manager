@@ -23,7 +23,7 @@ form.addEventListener('submit', async (e) => {
             const data = await registerMechanic(username_input.value, email_input.value, password_input.value);
             console.log(data);
             form.reset();
-        } catch (err) {
+        } catch {
             error_message.innerText = 'register failed.';
         }
     
