@@ -23,6 +23,7 @@ const getServiceRecordByCar = async (req, res) => {
         }
         return res.status(200).json(result.rows);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }
@@ -49,6 +50,7 @@ const createServiceRecord = async (req, res) => {
 
         return res.status(201).json(result.rows);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({msg: 'Server Error'})
     }
 }
@@ -76,6 +78,7 @@ const deleteServiceRecord = async (req, res) => {
 
         return res.status(200).json(result.rows);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }

@@ -12,6 +12,7 @@ const getAllClients = async (req, res) => {
         return res.status(200).json(result.rows);
 
     } catch (err) {
+        console.error(err);
         return res.status(404).send({msg: 'Mechanic has no clients'});
     }
 }
@@ -29,6 +30,7 @@ const getClient = async (req, res) => {
 
         return res.status(200).json(result.rows[0]);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }
@@ -44,6 +46,7 @@ const createClient = async (req, res) => {
         return res.status(201).json(result.rows);
 
     } catch (err) {
+        console.error(err);
         return res.status(500).send({msg: `Server Error`});
     }
 
@@ -62,6 +65,7 @@ const deleteClient = async (req, res) => {
 
         return res.status(200).json(result.rows);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }

@@ -22,7 +22,7 @@ form.addEventListener('submit', async (e) => {
         
         // redirect to clients pape on successful login
         window.location.href = 'clients.html';
-    } catch (err) {
+    } catch {
         error_message.innerText = 'Login failed.';
     }
 });
