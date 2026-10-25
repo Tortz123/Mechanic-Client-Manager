@@ -15,7 +15,7 @@ form.addEventListener('submit', async (e) => {
         form.reset();
 
     } catch (err) {
-        const error_message = document.getElementById('error-message');    
+        console.error(err);
     }
 })
 

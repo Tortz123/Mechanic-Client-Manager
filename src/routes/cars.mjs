@@ -22,6 +22,7 @@ const getAllCars = async (req, res) => {
         return res.status(200).json(result.rows);
 
     } catch (err) {
+        console.error(err);
         return res.status(404).send({msg: 'client has no cars'})
     }
 }
@@ -45,6 +46,7 @@ const getCar = async (req, res) => {
 
         return res.status(200).json(result.rows[0]);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }
@@ -70,6 +72,7 @@ const createCar = async (req, res) => {
         return res.status(201).json(result.rows);
 
     } catch (err) {
+        console.error(err);
         return res.status(500).send({msg: `Server Error`});
     }
 }
@@ -92,6 +95,7 @@ const deleteCar = async (req, res) => {
 
         return res.status(200).json(result.rows);
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }

@@ -12,6 +12,7 @@ const newMechanic = async (req, res) => {
         return res.status(201).json(result.rows);
 
     } catch (err) {
+        console.error(err);
         return res.status(401).send({msg: 'User Not Created'})
     }
 }
@@ -30,6 +31,7 @@ const loginMechanic = async (req, res) => {
         return res.status(200).send(result.rows[0]);
 
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }
@@ -40,6 +42,7 @@ const logoutMechanic = async (req, res) => {
         return res.clearCookie('connect.sid').status(201).send({msg: 'user logged out'});
 
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
     }
 }
@@ -53,6 +56,7 @@ const getMechanicInfo = async (req, res) => {
         res.status(200).send(req.session.user);
 
     } catch (err) {
+        console.error(err);
         return res.status(500).send({ msg: 'Server Error' });
 
     }

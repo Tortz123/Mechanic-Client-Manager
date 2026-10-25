@@ -1,41 +1,21 @@
 /*
+    Entry point: loads config, checks it, and starts the server.
+    The app itself is built in src/app.mjs.
+
     to run program:
-    npm run start:dev
+    npm run dev
 */
-import express from 'express';
-import routes from './routes/index.mjs';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-
-const app = express();
-// all Middleware must be called before any routes/endpoints 
-// to register JSON Middleware
-app.use(express.json());
-app.use(cookieParser());
-
-app.use(express.static('frontend'));
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-        maxAge: 60000 * 60,
-    },
-}));
-
-
-// to register all routers
-app.use('/api', routes);
-
-
+// Import order matters here: ES modules run their imports top to bottom,
+// before this file's own code.
+// 1. Load .env into process.env. In production there is no .env file,
+//    so this does nothing and the host's env vars are used.
+import 'dotenv/config';
+// 2. Exit with a clear message if required config is missing.
+import './utils/checkEnv.mjs';
+// 3. Only now build the app, which reads that config.
+import app from './app.mjs';
 
 const PORT = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-    res.status(201).send({msg: 'Hello world'});
-});
-
 
 app.listen(PORT, () => {
     console.log(`Running on port ${PORT}`);
