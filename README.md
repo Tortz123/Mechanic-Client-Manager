@@ -40,15 +40,15 @@ A full-stack web application for mechanics to manage their clients, cars, and se
 
 Make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Node.js](https://nodejs.org/) v20.19 or higher (v22 or v24 LTS recommended)
 - [PostgreSQL](https://www.postgresql.org/)
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/Tortz123/Mechanic-Client-Manager.git
+   cd Mechanic-Client-Manager
    ```
 
 2. **Install dependencies**
@@ -72,25 +72,30 @@ Make sure you have the following installed:
 
 4. **Configure environment variables**
 
-   Create a `.env` file in the root directory:
-   ```env
-   DB_USER=your_username
-   DB_HOST=localhost
-   DB_NAME=your_database
-   DB_PASSWORD=your_password
-   DB_PORT=5432
-   SESSION_SECRET=your_secret_key
+   Copy the example file, then fill in your own values:
+   ```bash
+   cp .env.example .env
    ```
+   (Windows PowerShell: `Copy-Item .env.example .env`)
+
+   | Variable | What to put there |
+   |----------|-------------------|
+   | `DATABASE_URL` | Your Postgres connection string: `postgres://USER:PASSWORD@localhost:5432/DATABASE`, using the user, password, and database from step 3. URL-encode special characters in the password (e.g. `@` → `%40`) |
+   | `SESSION_SECRET` | A long random string. Generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
+   | `PORT` | Optional, defaults to `3000` |
+   | `NODE_ENV` | `development` for local use |
+
+   `.env` is gitignored, so your secrets never get committed. The server refuses to start, with a message naming the variable, if `DATABASE_URL` or `SESSION_SECRET` is missing.
 
 5. **Start the server**
 
-   For development (with nodemon auto-reload):
+   For development (auto-restarts when you save a file):
    ```bash
-   npm run start:dev
+   npm run dev
    ```
    For production:
    ```bash
-   node ./src/index.mjs
+   npm start
    ```
 
 6. **Open the app**
@@ -98,6 +103,14 @@ Make sure you have the following installed:
    Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 > **Note:** This app is designed to run locally. It connects to a local PostgreSQL instance.
+
+### Useful commands
+
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Start the server with auto-restart (nodemon) |
+| `npm start` | Start the server once |
+| `npm run lint` | Check the code with ESLint |
 
 ---
 
@@ -113,7 +126,7 @@ Make sure you have the following installed:
 ## Project Structure
 
 ```
-mechanic_project/
+Mechanic-Client-Manager/
 ├── frontend/
 │   ├── api.js
 │   ├── cars.html / cars.js
@@ -124,11 +137,15 @@ mechanic_project/
 │   ├── index.html
 │   └── style.css
 ├── src/
+│   ├── middleware/     # Express middleware (e.g. requireAuth)
 │   ├── routes/         # Express route handlers
-│   ├── utils/          # Utility/helper functions
-│   └── index.mjs       # Entry point
+│   ├── utils/          # Helpers: database pool, env check
+│   ├── app.mjs         # Builds and exports the Express app
+│   └── index.mjs       # Entry point: loads config and starts the server
 ├── schema.sql          # Database schema
-├── .env                # Environment variables (not committed)
+├── .env.example        # Template for .env (copy it and fill in values)
+├── .env                # Your environment variables (not committed)
+├── eslint.config.mjs   # ESLint configuration
 ├── .gitignore
 └── package.json
 ```
