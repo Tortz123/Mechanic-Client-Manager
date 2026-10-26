@@ -72,9 +72,12 @@ function showError(err) {
         return;
     }
 
-    error_message.innerText = err.status === 404
-        ? 'You do not have access to this car.'
-        : 'Unable to load service records. Please try again.';
+    if (err.status === 404) {
+        error_message.innerText = 'You do not have access to this car.';
+        return;
+    }
+
+    error_message.innerText = 'Unable to load service records. Please try again.';
 }
 
 loadServiceRecords();
