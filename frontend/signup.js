@@ -23,8 +23,9 @@ form.addEventListener('submit', async (e) => {
             const data = await registerMechanic(username_input.value, email_input.value, password_input.value);
             console.log(data);
             form.reset();
-        } catch {
-            error_message.innerText = 'register failed.';
+        } catch (err) {
+            // requestJson throws with the server's message, e.g. "Username is already taken"
+            error_message.innerText = err.message || 'Register failed.';
         }
     
 });

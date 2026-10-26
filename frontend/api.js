@@ -23,7 +23,7 @@ export async function loginMechanic(username, password) {
 }
 
 export async function registerMechanic(username, email, password) {
-    const res = await fetch('http://localhost:3000/api/auth/register', {
+    return requestJson('http://localhost:3000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -32,7 +32,6 @@ export async function registerMechanic(username, email, password) {
             password: password
         })
     });
-    return res.json();
 }
 
 export async function getClients() {
