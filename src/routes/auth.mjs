@@ -70,7 +70,11 @@ const loginMechanic = async (req, res) => {
         // Always run bcrypt.compare, even when the user doesn't exist. Otherwise
         // "no such user" returns instantly and "wrong password" takes ~100 ms,
         // and an attacker could time responses to find valid usernames.
-        const passwordMatches = await bcrypt.compare(password, mechanic ? mechanic.passwordhash : DUMMY_HASH);
+        let hashToCheck = DUMMY_HASH;
+        if (mechanic) {
+            hashToCheck = mechanic.passwordhash;
+        }
+        const passwordMatches = await bcrypt.compare(password, hashToCheck);
 
         // Same response for both failures, so it doesn't reveal which one it was.
         if (!mechanic || !passwordMatches) {
