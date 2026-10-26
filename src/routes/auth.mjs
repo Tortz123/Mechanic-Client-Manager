@@ -5,9 +5,9 @@ const router = Router();
 
 const newMechanic = async (req, res) => {
     try {
-        const { body: {userName, email, passwordHash} } = req;
+        const { body: {userName, email, password} } = req;
 
-        const result = await pool.query('INSERT INTO mechanics (userName, email, passwordHash) VALUES ($1, $2, $3)', [userName, email, passwordHash]);
+        const result = await pool.query('INSERT INTO mechanics (userName, email, passwordHash) VALUES ($1, $2, $3)', [userName, email, password]);
 
         return res.status(201).json(result.rows);
 
@@ -19,10 +19,10 @@ const newMechanic = async (req, res) => {
 
 const loginMechanic = async (req, res) => {
     try {
-        const { body: { userName, passwordHash } } = req;
+        const { body: { userName, password } } = req;
         const result = await pool.query(
             'SELECT * FROM mechanics WHERE userName = $1 AND passwordHash = $2',
-            [userName, passwordHash]
+            [userName, password]
         );
         if (result.rows.length === 0) {
             return res.status(401).send({ msg: "Bad Credentials" });

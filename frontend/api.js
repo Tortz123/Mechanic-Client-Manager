@@ -16,8 +16,8 @@ export async function loginMechanic(username, password) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-            userName: username, 
-            passwordHash: password
+            userName: username,
+            password: password
         })
     });
 }
@@ -29,7 +29,7 @@ export async function registerMechanic(username, email, password) {
         body: JSON.stringify({
             userName: username,
             email: email,
-            passwordHash: password
+            password: password
         })
     });
     return res.json();
