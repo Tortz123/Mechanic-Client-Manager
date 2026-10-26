@@ -77,9 +77,12 @@ function showError(err) {
         return;
     }
 
-    error_message.innerText = err.status === 404
-        ? 'You do not have access to this client.'
-        : 'Unable to load cars. Please try again.';
+    if (err.status === 404) {
+        error_message.innerText = 'You do not have access to this client.';
+        return;
+    }
+
+    error_message.innerText = 'Unable to load cars. Please try again.';
 }
 
 loadCars();
