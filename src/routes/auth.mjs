@@ -9,6 +9,10 @@ const router = Router();
 const SALT_ROUNDS = 10;
 const MIN_PASSWORD_LENGTH = 8;
 
+// Compared against when a username doesn't exist, so a failed login takes
+// about the same time whether or not the user exists (see loginMechanic).
+const DUMMY_HASH = bcrypt.hashSync('timing-attack-dummy-password', SALT_ROUNDS);
+
 const newMechanic = async (req, res) => {
     try {
         const { body: {userName, email, password} } = req;
@@ -50,15 +54,33 @@ const newMechanic = async (req, res) => {
 const loginMechanic = async (req, res) => {
     try {
         const { body: { userName, password } } = req;
+        if (typeof userName !== 'string' || typeof password !== 'string') {
+            return res.status(400).send({ msg: 'Username and password are required' });
+        }
+
+        // Find the mechanic by username only. The password can't be compared in
+        // SQL: each hash has its own random salt, so hashing the same password
+        // again gives a different string.
         const result = await pool.query(
-            'SELECT * FROM mechanics WHERE userName = $1 AND passwordHash = $2',
-            [userName, password]
+            'SELECT id, userName, email, passwordHash FROM mechanics WHERE userName = $1',
+            [userName]
         );
-        if (result.rows.length === 0) {
+        const mechanic = result.rows[0];
+
+        // Always run bcrypt.compare, even when the user doesn't exist. Otherwise
+        // "no such user" returns instantly and "wrong password" takes ~100 ms,
+        // and an attacker could time responses to find valid usernames.
+        const passwordMatches = await bcrypt.compare(password, mechanic ? mechanic.passwordhash : DUMMY_HASH);
+
+        // Same response for both failures, so it doesn't reveal which one it was.
+        if (!mechanic || !passwordMatches) {
             return res.status(401).send({ msg: "Bad Credentials" });
         }
-        req.session.user = result.rows[0];
-        return res.status(200).send(result.rows[0]);
+
+        // Keep the hash out of the session and the response.
+        const user = { id: mechanic.id, username: mechanic.username, email: mechanic.email };
+        req.session.user = user;
+        return res.status(200).send(user);
 
     } catch (err) {
         console.error(err);
